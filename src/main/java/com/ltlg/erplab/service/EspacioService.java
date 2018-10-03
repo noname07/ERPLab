@@ -12,8 +12,8 @@ import com.ltlg.erplab.model.Espacio;
 import com.ltlg.erplab.repository.EspacioRepository;
 
 @Service
-public class EspacioService implements CrudService<Espacio>{
-	
+public class EspacioService implements CrudService<Espacio> {
+
 	@Autowired
 	private EspacioRepository repository;
 

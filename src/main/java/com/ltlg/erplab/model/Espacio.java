@@ -3,12 +3,8 @@ package com.ltlg.erplab.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -16,13 +12,13 @@ public class Espacio {
 
 	@Id
 	private int idEspacio;
-	
+
 	private String codigo;
 	private String nombre;
 	private String descripcion;
 	private int cantidad;
 	private boolean activo;
-	
+
 	@ManyToOne
 	private EstadoEspacio estadoEspacio;
 
