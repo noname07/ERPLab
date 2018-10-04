@@ -3,13 +3,11 @@ package com.ltlg.erplab.model;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -17,28 +15,27 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
 public class Reserva {
 
-	@Id 
-	public int idReserva;
+	@Id
+	private int idReserva;
 	@JsonFormat(pattern = "yyyy-MM-dd")
-	public Date dia;
-	public String actividad;
+	private Date dia;
+	private String actividad;
 	@JsonFormat(pattern = "HH:mm:ss")
-	public Time fechaDesde;
+	private Time fechaDesde;
 	@JsonFormat(pattern = "HH:mm:ss")
-	public Time fechaHasta;
-	@ManyToOne
-	public User usuarioGenero;
-	@ManyToOne
-	public Espacio espacioReservado;
-	@ManyToOne
-	public EstadoReserva estadoReserva;
-	@ManyToOne
-	public Materia materia;
-	@ManyToOne
-	public TipoActividad tipoActividad;
-	@ManyToOne
-	public CantAlumno cantAlumno;
-	
+	private Time fechaHasta;
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	private User usuarioGenero;
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	private Espacio espacioReservado;
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	private EstadoReserva estadoReserva;
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	private Materia materia;
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	private TipoActividad tipoActividad;
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	private CantAlumno cantAlumno;
 
 	public Reserva() {
 		super();
@@ -167,7 +164,5 @@ public class Reserva {
 
 		return errores;
 	}
-
-	
 
 }

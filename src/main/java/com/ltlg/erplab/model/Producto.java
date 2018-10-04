@@ -1,20 +1,26 @@
 package com.ltlg.erplab.model;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
+@Entity
 public class Producto {
 
-	public int idProducto;
-	public String descripcion;
-	public boolean activo;
-	public TipoProducto tipoProducto;
-	public Marca marca;
-	public Ubicacion ubicacion;
-	public Patrimonio patrimonio;
-	public Set<Producto> productos = new HashSet<Producto>(0);
+	@Id
+	private int idProducto;
+	private String descripcion;
+	private boolean activo;
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	private TipoProducto tipoProducto;
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	private Marca marca;
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	private Ubicacion ubicacion;
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	private Patrimonio patrimonio;
+	// public Set<Producto> productos = new HashSet<Producto>(0);
 
 	public Producto() {
 		super();
@@ -95,21 +101,4 @@ public class Producto {
 		this.patrimonio = patrimonio;
 	}
 
-	public List<String> validate() {
-		List<String> errores = new ArrayList<String>();
-
-		if (this.getDescripcion().isEmpty()) {
-			errores.add("El nombre es un campo obligatorio");
-
-		}
-		return errores;
-	}
-
-	public Set<Producto> getProductos() {
-		return productos;
-	}
-
-	public void setProductos(Set<Producto> productos) {
-		this.productos = productos;
-	}
 }

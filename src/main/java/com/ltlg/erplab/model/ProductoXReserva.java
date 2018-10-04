@@ -9,7 +9,6 @@ public class ProductoXReserva {
 
 	public ProductoXReserva() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Reserva getReserva() {
