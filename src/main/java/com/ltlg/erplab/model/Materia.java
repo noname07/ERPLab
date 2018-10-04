@@ -3,31 +3,34 @@ package com.ltlg.erplab.model;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Materia {
 
 	@Id
-	private int id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int idMateria;
 	private String descripcion;
 
 	public Materia() {
 		super();
 	}
 
-	public Materia(int id, String descripcion) {
+	public Materia(int idMateria, String descripcion) {
 		super();
-		this.id = id;
+		this.idMateria = idMateria;
 		this.descripcion = descripcion;
 	}
 
 	public int getId() {
-		return id;
+		return idMateria;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.idMateria = id;
 	}
 
 	public String getDescripcion() {

@@ -1,9 +1,9 @@
 package com.ltlg.erplab.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
@@ -11,15 +11,14 @@ import javax.persistence.ManyToOne;
 public class Espacio {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idEspacio;
-
 	private String codigo;
 	private String nombre;
 	private String descripcion;
 	private int cantidad;
 	private boolean activo;
-
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private EstadoEspacio estadoEspacio;
 
 	public Espacio() {
@@ -91,19 +90,6 @@ public class Espacio {
 
 	public void setEstadoEspacio(EstadoEspacio estadoEspacio) {
 		this.estadoEspacio = estadoEspacio;
-	}
-
-	public List<String> validate() {
-		List<String> errores = new ArrayList<String>();
-
-		if (this.getNombre().isEmpty()) {
-			errores.add("El nombre es un campo obligatorio");
-
-		}
-
-		// Agregar resto de validaciones.
-
-		return errores;
 	}
 
 	public Integer getId() {

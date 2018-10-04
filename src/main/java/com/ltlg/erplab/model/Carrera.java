@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -14,10 +16,11 @@ import javax.persistence.ManyToMany;
 public class Carrera {
 
 	@Id
-	private int id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int idCarrera;
 	private String descripcion;
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "materiaXcarrera", joinColumns = @JoinColumn(name = "carrera_idcarrera", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "materia_idmateria", referencedColumnName = "id"))
+	@JoinTable(name = "materiaxcarrera", joinColumns = @JoinColumn(name = "carrera_idcarrera", referencedColumnName = "idCarrera"), inverseJoinColumns = @JoinColumn(name = "materia_idmateria", referencedColumnName = "idMateria"))
 	private Set<Materia> materias = new HashSet<Materia>(0);
 
 	public Carrera() {
@@ -26,16 +29,16 @@ public class Carrera {
 
 	public Carrera(int id, String descripcion) {
 		super();
-		this.id = id;
+		this.idCarrera = id;
 		this.descripcion = descripcion;
 	}
 
 	public int getId() {
-		return id;
+		return idCarrera;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.idCarrera = id;
 	}
 
 	public String getDescripcion() {

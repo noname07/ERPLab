@@ -1,12 +1,15 @@
 package com.ltlg.erplab.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class TipoProducto {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idTipo;
 	private String descripcion;
 

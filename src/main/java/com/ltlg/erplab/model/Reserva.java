@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
@@ -16,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class Reserva {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idReserva;
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date dia;

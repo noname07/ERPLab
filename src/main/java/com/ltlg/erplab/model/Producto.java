@@ -2,6 +2,8 @@ package com.ltlg.erplab.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
@@ -9,6 +11,7 @@ import javax.persistence.ManyToOne;
 public class Producto {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idProducto;
 	private String descripcion;
 	private boolean activo;
