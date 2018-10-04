@@ -7,10 +7,17 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+@Entity
 public class Reserva {
 
+	@Id 
 	public int idReserva;
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	public Date dia;
@@ -19,13 +26,19 @@ public class Reserva {
 	public Time fechaDesde;
 	@JsonFormat(pattern = "HH:mm:ss")
 	public Time fechaHasta;
+	@ManyToOne
 	public User usuarioGenero;
+	@ManyToOne
 	public Espacio espacioReservado;
+	@ManyToOne
 	public EstadoReserva estadoReserva;
+	@ManyToOne
 	public Materia materia;
+	@ManyToOne
 	public TipoActividad tipoActividad;
+	@ManyToOne
 	public CantAlumno cantAlumno;
-	public Set<Producto> productos = new HashSet<Producto>(0);
+	
 
 	public Reserva() {
 		super();
@@ -155,12 +168,6 @@ public class Reserva {
 		return errores;
 	}
 
-	public Set<Producto> getProductos() {
-		return productos;
-	}
-
-	public void setProductos(Set<Producto> productos) {
-		this.productos = productos;
-	}
+	
 
 }
