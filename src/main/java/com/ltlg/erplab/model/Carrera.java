@@ -13,7 +13,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 @Entity
-public class Carrera {
+public class Carrera{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
