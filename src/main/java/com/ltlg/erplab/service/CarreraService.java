@@ -24,13 +24,13 @@ public class CarreraService implements CrudService<Carrera> {
 	}
 
 	@Override
-	public ResponseEntity<Carrera> remove(Carrera entity) {
-		Optional<Carrera> carreraOptional = repository.findById(entity.getId());
+	public ResponseEntity<Carrera> remove(Carrera entidad) {
+		Optional<Carrera> carreraOptional = repository.findById(entidad.getId());
 
 		if (!carreraOptional.isPresent())
 			return ResponseEntity.noContent().build();
 
-		repository.delete(entity);
+		repository.delete(entidad);
 		return ResponseEntity.noContent().build();
 	}
 

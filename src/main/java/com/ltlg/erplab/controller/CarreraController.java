@@ -40,6 +40,7 @@ public class CarreraController {
 
 	@DeleteMapping("/carreras")
 	public ResponseEntity<Carrera> remove(@RequestParam("id") int id) {
+		System.out.println("DELETE CARRERAAAAAAAAAAAAAAAAA");
 		return service.remove(id);
 	}
 
