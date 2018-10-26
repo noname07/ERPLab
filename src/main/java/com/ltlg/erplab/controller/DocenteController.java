@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.ltlg.erplab.model.User;
-import com.ltlg.erplab.service.UserService;
+import com.ltlg.erplab.model.Docente;
+import com.ltlg.erplab.service.DocenteService;
 
 @Controller
-public class UserController {
+public class DocenteController {
 
     @Autowired
-    private UserService service;
+    private DocenteService service;
 
 //    @RequestMapping("/resgistrarse")
 //    @ResponseBody
@@ -29,28 +29,28 @@ public class UserController {
 //        return service.registerUser(usuario);
 //    }
     
-    @GetMapping("/resgistrarse/{id}")
-	public ResponseEntity<User> get(@RequestParam("id") int id) {
+    @GetMapping("/altaDocente/{id}")
+	public ResponseEntity<Docente> get(@RequestParam("id") int id) {
 		return service.getById(id);
 	}
 
-	@RequestMapping(value = "/resgistrarse", method = RequestMethod.GET)
-	public ResponseEntity<List<User>> all() {
+	@RequestMapping(value = "/altaDocente", method = RequestMethod.GET)
+	public ResponseEntity<List<Docente>> all() {
 		return service.all();
 	}
 
-	@PostMapping(value = "/registrarse")
-	public ResponseEntity<User> add(@RequestBody User entity) {
+	@PostMapping(value = "/altaDocente")
+	public ResponseEntity<Docente> add(@RequestBody Docente entity) {
 		return service.add(entity);
 	}
 
-	@DeleteMapping("/registrarse")
-	public ResponseEntity<User> remove(@RequestParam("id") int id) {
+	@DeleteMapping("/altaDocente")
+	public ResponseEntity<Docente> remove(@RequestParam("id") int id) {
 		return service.remove(id);
 	}
 
-	@PutMapping("/registrarse")
-	public ResponseEntity<User> update(@RequestBody User entity) {
+	@PutMapping("/altaDocente")
+	public ResponseEntity<Docente> update(@RequestBody Docente entity) {
 		return service.update(entity);
 	}
 }

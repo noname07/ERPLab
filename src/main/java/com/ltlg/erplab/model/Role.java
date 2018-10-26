@@ -1,9 +1,12 @@
 package com.ltlg.erplab.model;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -33,4 +36,5 @@ public class Role {
 	public void setRole(String role) {
 		this.role = role;
 	}
+
 }
