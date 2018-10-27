@@ -1,5 +1,7 @@
 package com.ltlg.erplab.config;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,11 +35,24 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-
+		
 		http.cors().configurationSource(new CorsConfigurationSource() {
 			@Override
 			public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
-				return new CorsConfiguration().applyPermitDefaultValues();
+				CorsConfiguration corsConfiguration = new CorsConfiguration().applyPermitDefaultValues();
+				ArrayList<String> allowedOrigins = new ArrayList<>();
+				ArrayList<String> allowedMethods = new ArrayList<>();
+				
+				allowedMethods.add("GET");
+				allowedMethods.add("POST");
+				allowedMethods.add("PUT");
+				allowedMethods.add("DELETE");
+				allowedOrigins.add("*");
+				
+				corsConfiguration.setAllowedOrigins(allowedOrigins);
+				corsConfiguration.setAllowedMethods(allowedMethods);
+				corsConfiguration.addAllowedHeader("*");
+				return corsConfiguration;
 			}
 		});
 		http.csrf().disable();
@@ -60,4 +75,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			}
 		};
 	}
+	
 }

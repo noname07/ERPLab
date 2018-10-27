@@ -18,7 +18,7 @@ public class LoginController {
 
 	@Autowired
 	private LoginService userService;
-	
+
 	@PostMapping("/login")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void login(@RequestBody User user) {

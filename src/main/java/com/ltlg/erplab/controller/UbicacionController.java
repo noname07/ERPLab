@@ -12,38 +12,38 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ltlg.erplab.model.Espacio;
-import com.ltlg.erplab.repository.EspacioRepository;
+import com.ltlg.erplab.model.Ubicacion;
+import com.ltlg.erplab.repository.UbicacionRepository;
 
 @RestController
-public class EspacioController {
+public class UbicacionController {
 
 	@Autowired
-	private EspacioRepository repository;
+	private UbicacionRepository repository;
 
-	@GetMapping("/espacios/{id}")
-	public Optional<Espacio> get(@PathVariable("id") int id) {
+	@GetMapping("/ubicaciones/{id}")
+	public Optional<Ubicacion> get(@PathVariable("id") int id) {
 		return repository.findById(id);
 	}
 
-	@GetMapping("/espacios")
-	public List<Espacio> all() {
+	@GetMapping("/ubicaciones")
+	public List<Ubicacion> all() {
 		return repository.findAll();
 	}
 
-	@PostMapping("/espacios")
-	public Espacio add(@RequestBody Espacio entity) {
+	@PostMapping("/ubicaciones")
+	public Ubicacion add(@RequestBody Ubicacion entity) {
 		return repository.save(entity);
 	}
 
-	@DeleteMapping("/espacios")
-	public List<Espacio> remove(@PathVariable("id") int id) {
+	@DeleteMapping("/ubicaciones")
+	public void remove(@PathVariable("id") int id) {
 		repository.deleteById(id);
-		return repository.findAll();
 	}
 
-	@PutMapping("/espacios")
-	public Espacio update(@RequestBody Espacio entity) {
+	@PutMapping("/ubicaciones")
+	public Ubicacion update(@RequestBody Ubicacion entity) {
 		return repository.save(entity);
 	}
+
 }

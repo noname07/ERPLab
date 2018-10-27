@@ -26,7 +26,6 @@ public class Espacio {
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
-		this.cantidad = cantidad;
 		this.activo = activo;
 	}
 

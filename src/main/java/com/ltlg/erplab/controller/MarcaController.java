@@ -12,38 +12,37 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ltlg.erplab.model.Espacio;
-import com.ltlg.erplab.repository.EspacioRepository;
+import com.ltlg.erplab.model.Marca;
+import com.ltlg.erplab.repository.MarcaRepository;
 
 @RestController
-public class EspacioController {
+public class MarcaController {
 
 	@Autowired
-	private EspacioRepository repository;
+	private MarcaRepository repository;
 
-	@GetMapping("/espacios/{id}")
-	public Optional<Espacio> get(@PathVariable("id") int id) {
+	@GetMapping("/marcas/{id}")
+	public Optional<Marca> get(@PathVariable("id") int id) {
 		return repository.findById(id);
 	}
 
-	@GetMapping("/espacios")
-	public List<Espacio> all() {
+	@GetMapping("/marcas")
+	public List<Marca> all() {
 		return repository.findAll();
 	}
 
-	@PostMapping("/espacios")
-	public Espacio add(@RequestBody Espacio entity) {
+	@PostMapping("/marcas")
+	public Marca add(@RequestBody Marca entity) {
 		return repository.save(entity);
 	}
 
-	@DeleteMapping("/espacios")
-	public List<Espacio> remove(@PathVariable("id") int id) {
+	@DeleteMapping("/marcas")
+	public void remove(@PathVariable("id") int id) {
 		repository.deleteById(id);
-		return repository.findAll();
 	}
 
-	@PutMapping("/espacios")
-	public Espacio update(@RequestBody Espacio entity) {
+	@PutMapping("/marcas")
+	public Marca update(@RequestBody Marca entity) {
 		return repository.save(entity);
 	}
 }

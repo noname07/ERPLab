@@ -4,4 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.ltlg.erplab.model.Espacio;
 
-public interface EspacioRepository extends JpaRepository<Espacio, Integer>{}
+public interface EspacioRepository extends JpaRepository<Espacio, Integer>{
+}

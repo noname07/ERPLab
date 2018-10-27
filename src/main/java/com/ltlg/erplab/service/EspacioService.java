@@ -58,7 +58,7 @@ public class EspacioService implements CrudService<Espacio> {
 
 	@Override
 	public ResponseEntity<List<Espacio>> all() {
-		return ResponseEntity.ok(repository.findAll());
+		return ResponseEntity.ok(repository.findAll());	
 	}
 
 	@Override
