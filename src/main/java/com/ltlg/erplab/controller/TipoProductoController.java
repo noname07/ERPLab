@@ -12,38 +12,38 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ltlg.erplab.model.Espacio;
-import com.ltlg.erplab.repository.EspacioRepository;
+import com.ltlg.erplab.model.TipoProducto;
+import com.ltlg.erplab.repository.TipoProductoRepository;
 
 @RestController
-public class EspacioController {
+public class TipoProductoController {
 
 	@Autowired
-	private EspacioRepository repository;
+	private TipoProductoRepository repository;
 
-	@GetMapping("/espacios/{id}")
-	public Optional<Espacio> get(@PathVariable("id") int id) {
+	@GetMapping("/tipoProductos/{id}")
+	public Optional<TipoProducto> get(@PathVariable("id") int id) {
 		return repository.findById(id);
 	}
 
-	@GetMapping("/espacios")
-	public List<Espacio> all() {
+	@GetMapping("/tipoProductos")
+	public List<TipoProducto> all() {
 		return repository.findAll();
 	}
 
-	@PostMapping("/espacios")
-	public Espacio add(@RequestBody Espacio entity) {
+	@PostMapping("/tipoProductos")
+	public TipoProducto add(@RequestBody TipoProducto entity) {
 		return repository.save(entity);
 	}
 
-	@DeleteMapping("/espacios")
-	public List<Espacio> remove(@PathVariable("id") int id) {
+	@DeleteMapping("/tipoProductos")
+	public void remove(@PathVariable("id") int id) {
 		repository.deleteById(id);
-		return repository.findAll();
 	}
 
-	@PutMapping("/espacios")
-	public Espacio update(@RequestBody Espacio entity) {
+	@PutMapping("/tipoProductos")
+	public TipoProducto update(@RequestBody TipoProducto entity) {
 		return repository.save(entity);
 	}
+
 }

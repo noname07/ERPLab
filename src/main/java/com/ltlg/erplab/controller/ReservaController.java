@@ -6,12 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ltlg.erplab.model.Reserva;
@@ -24,28 +22,23 @@ public class ReservaController {
 	private ReservaService service;
 
 	@GetMapping("/reservas/{id}")
-	public ResponseEntity<Reserva> get(@RequestParam("id") int id) {
+	public ResponseEntity<Reserva> get(@PathVariable("id") int id) {
 		return service.getById(id);
 	}
 
-	@RequestMapping(value = "/reservas", method = RequestMethod.GET)
+	@GetMapping("/reservas")
 	public ResponseEntity<List<Reserva>> all() {
 		return service.all();
 	}
 
-	@PostMapping(value = "/reservas")
+	@PostMapping("/reservas")
 	public ResponseEntity<Reserva> add(@RequestBody Reserva entity) {
+		service.validate(entity);
 		return service.add(entity);
 	}
 	
-	// TODO lucas chequea esto a ver si va bien.
-	@PostMapping(value = "/reservas")
-	public ResponseEntity<Reserva> validate(@RequestBody Reserva entity) {
-		return service.validate(entity);
-	}
-
 	@DeleteMapping("/reservas")
-	public ResponseEntity<Reserva> remove(@RequestParam("id") int id) {
+	public ResponseEntity<Reserva> remove(@PathVariable("id") int id) {
 		return service.remove(id);
 	}
 
@@ -53,4 +46,5 @@ public class ReservaController {
 	public ResponseEntity<Reserva> update(@RequestBody Reserva entity) {
 		return service.update(entity);
 	}
+
 }

@@ -31,7 +31,7 @@ public class EspacioService implements CrudService<Espacio> {
 			return ResponseEntity.noContent().build();
 
 		repository.delete(entity);
-		return ResponseEntity.noContent().build();
+		return ResponseEntity.ok().build();
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class EspacioService implements CrudService<Espacio> {
 			return ResponseEntity.noContent().build();
 
 		repository.deleteById(id);
-		return ResponseEntity.noContent().build();
+		return ResponseEntity.ok().build();
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class EspacioService implements CrudService<Espacio> {
 
 	@Override
 	public ResponseEntity<List<Espacio>> all() {
-		return ResponseEntity.ok(repository.findAll());
+		return ResponseEntity.ok(repository.findAll());	
 	}
 
 	@Override

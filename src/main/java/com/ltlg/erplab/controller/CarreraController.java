@@ -1,50 +1,48 @@
 package com.ltlg.erplab.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ltlg.erplab.model.Carrera;
-import com.ltlg.erplab.service.CarreraService;
+import com.ltlg.erplab.repository.CarreraRepository;
 
 @RestController
 public class CarreraController {
 
 	@Autowired
-	private CarreraService service;
+	private CarreraRepository repository;
 
 	@GetMapping("/carreras/{id}")
-	public ResponseEntity<Carrera> get(@RequestParam("id") int id) {
-		return service.getById(id);
+	public Optional<Carrera> get(@PathVariable("id") int id) {
+		return repository.findById(id);
 	}
 
-	@RequestMapping(value = "/carreras", method = RequestMethod.GET)
-	public ResponseEntity<List<Carrera>> all() {
-		return service.all();
+	@GetMapping("/carreras")
+	public List<Carrera> all() {
+		return repository.findAll();
 	}
 
-	@PostMapping(value = "/carreras")
-	public ResponseEntity<Carrera> add(@RequestBody Carrera entity) {
-		return service.add(entity);
+	@PostMapping("/carreras")
+	public Carrera add(@RequestBody Carrera entity) {
+		return repository.save(entity);
 	}
 
 	@DeleteMapping("/carreras")
-	public ResponseEntity<Carrera> remove(@RequestParam("id") int id) {
-		return service.remove(id);
+	public void remove(@PathVariable("id") int id) {
+		repository.deleteById(id);
 	}
 
 	@PutMapping("/carreras")
-	public ResponseEntity<Carrera> update(@RequestBody Carrera entity) {
-		return service.update(entity);
+	public Carrera update(@RequestBody Carrera entity) {
+		return repository.save(entity);
 	}
 }
