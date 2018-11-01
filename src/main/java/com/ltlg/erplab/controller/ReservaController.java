@@ -37,6 +37,12 @@ public class ReservaController {
 	public ResponseEntity<Reserva> add(@RequestBody Reserva entity) {
 		return service.add(entity);
 	}
+	
+	// TODO lucas chequea esto a ver si va bien.
+	@PostMapping(value = "/reservas")
+	public ResponseEntity<Reserva> validate(@RequestBody Reserva entity) {
+		return service.validate(entity);
+	}
 
 	@DeleteMapping("/reservas")
 	public ResponseEntity<Reserva> remove(@RequestParam("id") int id) {

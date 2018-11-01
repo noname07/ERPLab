@@ -2,8 +2,6 @@ package com.ltlg.erplab.model;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -24,9 +22,10 @@ public class Reserva {
 	private Date dia;
 	private String actividad;
 	@JsonFormat(pattern = "HH:mm:ss")
-	private Time fechaDesde;
+	private Time hrDesde;
 	@JsonFormat(pattern = "HH:mm:ss")
-	private Time fechaHasta;
+	private Time hrHasta;
+	
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private User usuarioGenero;
 	@ManyToOne(cascade = CascadeType.PERSIST)
@@ -44,9 +43,8 @@ public class Reserva {
 		super();
 	}
 
-	public Reserva(int idReserva2, int idUsuario, int idEspacio, int idEstadoReserva) {
-		this.idReserva = idReserva2;
-
+	public Reserva(int idReserva, int idUsuario, int idEspacio, int idEstadoReserva) {
+		this.idReserva = idReserva;
 	}
 
 	public Reserva(int idReserva, Date dia, String actividad, Time fechaDesde, Time fechaHasta, User usuarioGenero,
@@ -56,8 +54,8 @@ public class Reserva {
 		this.idReserva = idReserva;
 		this.dia = dia;
 		this.actividad = actividad;
-		this.fechaDesde = fechaDesde;
-		this.fechaHasta = fechaHasta;
+		this.hrDesde = fechaDesde;
+		this.hrHasta = fechaHasta;
 		this.usuarioGenero = usuarioGenero;
 		this.espacioReservado = espacioReservado;
 		this.estadoReserva = estadoReserva;
@@ -91,19 +89,19 @@ public class Reserva {
 	}
 
 	public Time getFechaDesde() {
-		return fechaDesde;
+		return hrDesde;
 	}
 
 	public void setFechaDesde(Time fechaDesde) {
-		this.fechaDesde = fechaDesde;
+		this.hrDesde = fechaDesde;
 	}
 
 	public Time getFechaHasta() {
-		return fechaHasta;
+		return hrHasta;
 	}
 
 	public void setFechaHasta(Time fechaHasta) {
-		this.fechaHasta = fechaHasta;
+		this.hrHasta = fechaHasta;
 	}
 
 	public User getUsuarioGenero() {
@@ -154,18 +152,25 @@ public class Reserva {
 		this.cantAlumno = cantAlumno;
 	}
 
-	public List<String> validate() {
-		List<String> errores = new ArrayList<String>();
-
-		if (this.getActividad().isEmpty()) {
-			errores.add("El campo actividad es obligatorio");
-		}
-
-		if (this.getFechaDesde().after(this.getFechaHasta())) {
-			errores.add("La hora 'DESDE' debe ser inferior a la hora 'HASTA'");
-		}
-
-		return errores;
+	public boolean seSolapa(Reserva reserva) {
+		
+		if(reserva.dia.equals(dia)) {
+			// La reserva inicia antes y finaliza despues que la reserva actual.
+			if(reserva.hrDesde.before(hrDesde) && reserva.hrHasta.after(hrHasta))
+				return true;
+			
+			// Hora de Inicio entre un horario reservado.
+			else if(reserva.hrDesde.after(hrDesde) && reserva.hrDesde.before(hrHasta))
+				return true;
+			
+			// Hora de Fin entre un horario reservado.
+			else if(reserva.hrDesde.before(hrDesde) && reserva.hrHasta.after(hrDesde))
+				return true;
+			
+			// Alguno de los horarios de inicio o fin se solapan con alguna reserva.
+			else if(reserva.hrDesde.equals(hrDesde) || reserva.hrHasta.equals(hrHasta))
+				return true;
+		}		
+		return false;
 	}
-
 }

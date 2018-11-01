@@ -1,7 +1,5 @@
 package com.ltlg.erplab.model;
 
-import java.util.List;
-
 public class ProductoXReserva {
 
 	private Reserva reserva;
@@ -25,11 +23,6 @@ public class ProductoXReserva {
 
 	public void setInventario(Inventario inventario) {
 		this.inventario = inventario;
-	}
-
-	public List<String> validate() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

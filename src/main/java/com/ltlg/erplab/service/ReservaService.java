@@ -47,9 +47,9 @@ public class ReservaService implements CrudService<Reserva> {
 
 	@Override
 	public ResponseEntity<Reserva> update(Reserva entity) {
-		Optional<Reserva> carreraOptional = repository.findById(entity.getIdReserva());
+		Optional<Reserva> reservaOpcional = repository.findById(entity.getIdReserva());
 
-		if (!carreraOptional.isPresent())
+		if (!reservaOpcional.isPresent())
 			return ResponseEntity.noContent().build();
 
 		repository.save(entity);
@@ -69,6 +69,15 @@ public class ReservaService implements CrudService<Reserva> {
 			return ResponseEntity.noContent().build();
 
 		return ResponseEntity.ok(carreraOptional.get());
+	}
+
+	public ResponseEntity<Reserva> validate(Reserva entity) {
+		for(Reserva r: repository.findAll()) {
+			if(r.seSolapa(entity)) {
+				ResponseEntity.badRequest();
+			}
+		}
+		return ResponseEntity.ok(entity);
 	}
 
 }
